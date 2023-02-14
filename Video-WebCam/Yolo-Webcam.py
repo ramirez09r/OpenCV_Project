@@ -28,7 +28,11 @@ classNames = ['person', 'bicycle', 'car', 'motorbike', 'airplane', ' bus', 'trai
 cap = cv2.VideoCapture('../video/people.mp4')
 
 # Load the YOLO trained model from Yolo-Weights fite (Check Github)
-model = YOLO("../Yolo-Weights/yolov8n.pt")
+model = YOLO("yolov8n")
+
+#Use this after you create a Yolo-Weights folder to save your yolo file generated after you run your app 1st time
+# Makes it so you don't have to build model every time **MAKE SURE TO COMMENT OUT THE PREVIOUS model BLOCK
+#model = YOLO("../Yolo-Weights/yolov8n.pt")
 
 
 # Loop to display images, add boxes and labels
