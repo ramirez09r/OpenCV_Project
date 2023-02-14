@@ -25,6 +25,7 @@ classNames = ['person', 'bicycle', 'car', 'motorbike', 'airplane', ' bus', 'trai
 # cap.set(4, 720)
 
 #Video import #Webcam import  *****UNCOMENT THIS BLOCK TO USE VIDEO FILE MAKE SURE TO COMENT OUT THE WEBCAM IMPORT BLOCK******
+# I uploaded some test videos on GitHub, but it should work on any mp4
 cap = cv2.VideoCapture('../video/people.mp4')
 
 # Load the YOLO trained model from Yolo-Weights fite (Check Github)
