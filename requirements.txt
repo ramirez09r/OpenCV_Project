@@ -1,3 +1,6 @@
+# These are the packages used to run program on Pycharm
+# I am not 100% sure this runs on other IDEs, but it should
+
 cvzone==1.5.6
 ultralytics==8.0.26
 hydra-core>=1.2.0
