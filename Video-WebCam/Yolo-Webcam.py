@@ -20,7 +20,7 @@ classNames = ['person', 'bicycle', 'car', 'motorbike', 'airplane', ' bus', 'trai
 # cap.set(4, 720)
 
 #Video import
-cap = cv2.VideoCapture('../Videos/people.mp4') #C:\Users\ramir\PycharmProjects\Object-Detection\Videos
+cap = cv2.VideoCapture('../Videos/people.mp4')
 
 model = YOLO("../Yolo-Weights/yolov8n.pt")
 
