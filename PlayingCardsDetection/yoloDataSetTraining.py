@@ -22,10 +22,10 @@ classNames= ['10c', '10d', '10h', '10s', '2c', '2d', '2h', '2s', '3c', '3d', '3h
 
 # Video import #Webcam import  *****UNCOMENT THIS BLOCK TO USE VIDEO FILE MAKE SURE TO COMENT OUT THE WEBCAM IMPORT BLOCK******
 # I uploaded some test videos on GitHub, but it should work on any mp4
-cap = cv2.VideoCapture('../Videos/BlkJck.mp4')
+cap = cv2.VideoCapture('BlkJck.mp4')
 
 # Load the YOLO trained model from Yolo-Weights fite (Check Github)
-model = YOLO("../Yolo-Weights/CardModelNano.pt")
+model = YOLO("CardModelNano.pt")
 
 # Use this after you create a Yolo-Weights folder to save your yolo file generated after you run your app 1st time
 # Makes it so you don't have to build model every time **MAKE SURE TO COMMENT OUT THE PREVIOUS model BLOCK
