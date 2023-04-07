@@ -1,0 +1,11 @@
+Please excuse the findScore being somewhat messy, I know it can be cleaned up, but I haven't had a chance. 
+
+
+These 2 files contain an application prototyoe tha is pretty much ready for presentation, we just need to integrate the tkinter portion that some of you have with it. 
+On the findScore.py file you will find the app() and app_webcam() functions which are linked to their respective buttons and are called by tkinter on the app.py file.
+
+
+These files can be used for our presentation coming up, but I will work on cleaning up the functions for further presentations. As you will see the webcam and pre-recorded functions work differently due to the masking of the frames. I am currently working on a possible solution for this, but it probably won't be ready for our first presentation, however I think we are good to go as far as 1st prototype. 
+
+I commented my code as much as I could, but let me know if you have any questions. 
+ 
