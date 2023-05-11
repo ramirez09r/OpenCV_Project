@@ -5,6 +5,7 @@
 from tkinter import *
 import findScore
 import os
+import string
 from tkinter import ttk
 #----------------------
 
@@ -92,8 +93,20 @@ def registerNewUser():
     global rtlButton_window
 
     #Grabbing the string literals from newUsernameEntry and newPasswordEntry
-    newUsernameInfo = newUsernameEntry.get()
-    newPasswordInfo = newPasswordEntry.get()
+    newUsernameInfoTemp = newUsernameEntry.get()
+    newPasswordInfoTemp = newPasswordEntry.get()
+
+    #This will encode the newly entered username and password before it
+    #gets saved locally, the key for this encryption can be found in --MAIN--
+    newUsernameInfo = ""
+    for letter in newUsernameInfoTemp:
+        index = chars.index(letter)
+        newUsernameInfo += key[index]
+
+    newPasswordInfo = ""
+    for letter in newPasswordInfoTemp:
+        index = chars.index(letter)
+        newPasswordInfo += key[index]
 
     #This will open (create) a new file titled after the newUsernameInfo, it will then
     #put the new username on the first line, then the new password on the second line.
@@ -189,9 +202,28 @@ def loginScreen():
 #so in essence it just displays an error message and allows the user to try logging in again
 def loginVerification():
 
+    #Setting global variables so they can be used in other functions
+    global displayName
+
     #Grabs the entered username and password from the login entries
-    username = usernameEntry.get()
-    password = passwordEntry.get()
+    usernameTemp = usernameEntry.get()
+    passwordTemp = passwordEntry.get()
+
+    #This is stored so we can display their username in the main menu screen
+    displayName = usernameTemp
+
+    #This will encode the login information that was just entered, so it
+    #can properly be compared against the encrypted data stored locally
+
+    username = ""
+    for letter in usernameTemp:
+        index = chars.index(letter)
+        username += key[index]
+
+    password = ""
+    for letter in passwordTemp:
+        index = chars.index(letter)
+        password += key[index]
 
     #Clears those entries to allow for subsequent attempts if the user enteres incorrect credentials
     usernameEntry.delete(0, END)
@@ -315,9 +347,15 @@ def loginScreenFF():
 def menuScreen():
 
     #Setting widgets as global variables so we can delete them in a later screen
-    global playBjButton
-    global playBjButton_window
+    global demoButton
+    global demoButton_window
+    global antiCheatButton
+    global antiCheatButton_window
     global menuText
+    global webcamButton
+    global webcamButton_window
+    global selectFileButton
+    global selectFileButton_window
 
     #Deletes the widgets from login screen
     mainCanvas.delete(usernameEntry_window)
@@ -333,12 +371,22 @@ def menuScreen():
     #Once the user presses this button, it will start running Rick's code to play blackjack using a file.
     #NOTE: at the moment the 'playBlackJackFile' function does not exist so I have removed the command for now
     #just so the program will actually run without throwing an error
-    playBjButton = Button(root, text="Play Black Jack", font=("Helvetica", 30), width=16, fg="violet", bg="#FFFACC",
+    demoButton = Button(root, text="Play Demo", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC",
                           command=findScore.app)
+    webcamButton = Button(root, text="Use Webcam", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC")
+    selectFileButton = Button(root, text="Select Mp4 File", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC")
+
+
+    #Creates a variable that allows us to display the user specific name on the menu screen
+    nameDisplay = "Welcome back " + displayName + "!"
 
     #Placing the new widgets, including a menuText text onto the canvas for the menu screen window
-    playBjButton_window = mainCanvas.create_window(415, 340, anchor='nw', window=playBjButton)
-    menuText = mainCanvas.create_text(598.5, 40, text="Welcome back User!", font=("Helvetica", 50), fill='#FFFACC')
+
+    webcamButton_window = mainCanvas.create_window(415, 440, anchor='nw', window=webcamButton)
+    selectFileButton_window = mainCanvas.create_window(415, 320, anchor='nw', window=selectFileButton)
+    demoButton_window = mainCanvas.create_window(415, 200, anchor='nw', window=demoButton)
+    menuText = mainCanvas.create_text(598.5, 40, text=nameDisplay, font=("Helvetica", 50), fill='#FFFACC')
+
 #----------------------------------------------------------------------------------------------------------
 
 #This function runs after the user presses the 'playBjButton' on the menuScreen, this function
@@ -363,6 +411,28 @@ root = Tk()
 root.title("Bad Ace Technologies")
 root.geometry('1197x716')
 root.config(background='#010E17')
+
+global chars
+global key
+
+
+# The following lines of code is in regards to the key that is used to encode the user data before it gets
+# saved locally onto their computers, this helps boost security.
+chars = " " + string.punctuation + string.digits + string.ascii_letters
+
+chars = list(chars)
+key = ['y', '+', 'Q', '>', '%', 'A', 's', 'B',
+       '[', 'h', ',', 'K', '\\', '!', 'f', 'Z',
+       'U', 'l', '1', '(', 'I', '`', '5', 'k',
+       'J', '^', 'C', 'x', 'p', 'i', '$', 'M',
+       '#', 'r', 'H', '*', '@', '0', 'z', ';',
+       '3', 'F', '?', 'b', '"', 'P', '&', 'L',
+       '|', '4', '8', 'v', 'X', 'V', 'j', 'W',
+       '}', 'N', 'c', '2', '6', "'", ')', '~',
+       'E', 'T', 'w', 'Y', 't', 'O', 'o', 'd',
+       'u', ']', '{', '.', 'e', '<', '9', 'n',
+       '-', ' ', '/', 'D', ':', '=', 'G', 'q',
+       '7', 'a', '_', 'R', 'S', 'm', 'g']
 
 #Creating a canvas that will serve as a container for all of our widgets, including the background image
 #This canvas is what we are going to be adding and deleting widgets on and off of, to help create
