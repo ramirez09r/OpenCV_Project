@@ -3,6 +3,7 @@
 #-------IMPORTS--------
 #NOTE: need to figure out a way to merge Rick's virtual environment with mine so we can run his functions.
 from tkinter import *
+from tkinter import filedialog
 import findScore
 import expansion
 import os
