@@ -105,11 +105,11 @@ def app(filepath):
     video_file = cv2.VideoCapture(path)
 
     # Load the YOLO trained model from Yolo-Weights fite (Check Github)
-    model = YOLO("../Models/CardModeNano.pt")
+    model = YOLO("CardsModelNano.pt")
 
     # Create masks
-    dealer_mask = cv2.imread('../images/dealer_mask720.png')
-    player_mask = cv2.imread('../images/player_mask720.png')
+    dealer_mask = cv2.imread('../images/dealer_mask1.png')
+    player_mask = cv2.imread('../images/player_mask1.png')
     deck = []  # Empty list to keep track of all the cards dealt (player and dealer)
 
     # Loop to display images, add boxes and labels
@@ -222,7 +222,7 @@ def app_webcam():
     cap.set(4, 720)
 
     # Load the YOLO trained model from Yolo-Weights fite (Check Github)
-    model = YOLO("../Models/playingCards.pt")
+    model = YOLO("CardsModelNano.pt")
 
 
     # Loop to display images, add boxes and labels
