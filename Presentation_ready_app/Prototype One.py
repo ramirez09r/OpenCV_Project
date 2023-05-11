@@ -4,6 +4,7 @@
 #NOTE: need to figure out a way to merge Rick's virtual environment with mine so we can run his functions.
 from tkinter import *
 import findScore
+import expansion
 import os
 import string
 from tkinter import ttk
