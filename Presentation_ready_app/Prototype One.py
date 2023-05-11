@@ -372,9 +372,9 @@ def menuScreen():
     #NOTE: at the moment the 'playBlackJackFile' function does not exist so I have removed the command for now
     #just so the program will actually run without throwing an error
     demoButton = Button(root, text="Play Demo", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC",
-                          command=findScore.app)
-    webcamButton = Button(root, text="Use Webcam", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC")
-    selectFileButton = Button(root, text="Select Mp4 File", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC")
+                          command=expansion.people_tracker)
+    webcamButton = Button(root, text="Use Webcam", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC", command=findscore.app_webcam)
+    selectFileButton = Button(root, text="Select Mp4 File", font=("Helvetica", 30), width=16, fg="purple", bg="#FFFACC", command=findscore.select_file)
 
 
     #Creates a variable that allows us to display the user specific name on the menu screen
