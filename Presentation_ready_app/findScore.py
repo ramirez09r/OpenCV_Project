@@ -4,8 +4,22 @@ import cv2
 import cvzone
 import math
 
+classNames = ['10C', '10D', '10H', '10S',
+                  '2C', '2D', '2H', '2S',
+                  '3C', '3D', '3H', '3S',
+                  '4C', '4D', '4H', '4S',
+                  '5C', '5D', '5H', '5S',
+                  '6C', '6D', '6H', '6S',
+                  '7C', '7D', '7H', '7S',
+                  '8C', '8D', '8H', '8S',
+                  '9C', '9D', '9H', '9S',
+                  'AC', 'AD', 'AH', 'AS',
+                  'JC', 'JD', 'JH', 'JS',
+                  'KC', 'KD', 'KH', 'KS',
+                  'QC', 'QD', 'QH', 'QS']
+
 # This function calculates the score (player/dealer)
-# At this point it reads 'A' as an 11 / Will work on logic
+# At this point it reads 'A' as a 10 / Will work on logic
 
 def findBlackjackScore(hand):
     ranks = []
@@ -18,9 +32,7 @@ def findBlackjackScore(hand):
         if len(card) == 2:
             rank = card[0]
             suit = card[1]
-            if rank == "A":
-                value = 11
-            elif rank == "J" or rank == "Q" or rank == "K":
+            if rank == "A" or rank == "J" or rank == "Q" or rank == "K":
                 value = 10
             else:
                 value = int(rank)
@@ -28,13 +40,11 @@ def findBlackjackScore(hand):
         else:
             rank = card[0:2]
             suit = card[2]
-            if rank == "A":
-                value = 11
-            elif rank == "J" or rank == "Q" or rank == "K":
+            if rank == "A" or rank == "J" or rank == "Q" or rank == "K":
                 value = 10
             else:
                 value = int(rank)
-
+        
         values.append(value)
 
     #print(values)
@@ -88,29 +98,11 @@ def running_count(deck):
     return count
 
 
-def app():
-    classNames = ['10C', '10D', '10H', '10S',
-                  '2C', '2D', '2H', '2S',
-                  '3C', '3D', '3H', '3S',
-                  '4C', '4D', '4H', '4S',
-                  '5C', '5D', '5H', '5S',
-                  '6C', '6D', '6H', '6S',
-                  '7C', '7D', '7H', '7S',
-                  '8C', '8D', '8H', '8S',
-                  '9C', '9D', '9H', '9S',
-                  'AC', 'AD', 'AH', 'AS',
-                  'JC', 'JD', 'JH', 'JS',
-                  'KC', 'KD', 'KH', 'KS',
-                  'QC', 'QD', 'QH', 'QS']
-
-    # Webcam import  *****UNCOMENT THIS BLOCK TO USE WEB CAM MAKE SURE TO COMENT OUT THE VIDEO IMPORT BLOCK******
-    # cap = cv2.VideoCapture(2)  # For Webcam
-    # cap.set(3, 1280)
-    # cap.set(4, 720)
-
+def app(filepath):
     # Video import #Webcam import  *****UNCOMENT THIS BLOCK TO USE VIDEO FILE MAKE SURE TO COMENT OUT THE WEBCAM IMPORT BLOCK******
     # I uploaded some test videos on GitHub, but it should work on any mp4
-    video_file = cv2.VideoCapture('../videos/player_v_dealer720.mp4')
+    path = filepath
+    video_file = cv2.VideoCapture(path)
 
     # Load the YOLO trained model from Yolo-Weights fite (Check Github)
     model = YOLO("../Models/CardModeNano.pt")
@@ -211,24 +203,15 @@ def app():
 
         # Display the video
         cv2.imshow('Image', img)
-        cv2.waitKey(1)
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
 
-
+    # Release the video file and close the window
+    video_file.release()
+    cv2.destroyAllWindows()
+    
+    
 def app_webcam():
-
-    classNames = ['10c', '10d', '10h', '10s',
-                  '2c', '2d', '2h', '2s',
-                  '3c', '3d', '3h', '3s',
-                  '4c', '4d', '4h', '4s',
-                  '5c', '5d', '5h', '5s',
-                  '6c', '6d', '6h', '6s',
-                  '7c', '7d', '7h', '7s',
-                  '8c', '8d', '8h', '8s',
-                  '9c', '9d', '9h', '9s',
-                  'Ac', 'Ad', 'Ah', 'As',
-                  'Jc', 'Jd', 'Jh', 'Js',
-                  'Kc', 'Kd', 'Kh', 'Ks',
-                  'Qc', 'Qd', 'Qh', 'Qs']
 
     deck = []
     counter = 0
@@ -294,8 +277,23 @@ def app_webcam():
         # Display the video
         cvzone.putTextRect(img, f'{counter}', (20, 110), scale=1.8)
         cv2.imshow('Image', img)
-        cv2.waitKey(1)
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
 
+    # Release the video file and close the window
+    cap.release()
+    cv2.destroyAllWindows()
+        
+
+        
+   
+def select_file():
+    file_path = filedialog.askopenfilename()
+    print("Selected file:", file_path)
+
+    findScore.app(file_path)
+    
+    
 
 if __name__ =='__main__':
 
@@ -306,3 +304,5 @@ if __name__ =='__main__':
     app()
 
     app_webcam()
+    
+    select_file()
